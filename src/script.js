@@ -61,13 +61,23 @@ gltfLoader.setDRACOLoader(dracoLoader);
 /**
  * Environment map
  */
-rgbeLoader.load('./urban_alley_01_1k.hdr', (environmentMap) =>
-{
-    environmentMap.mapping = THREE.EquirectangularReflectionMapping;
+// rgbeLoader.load('./rick-and-morty-orange-space.jpg', (environmentMap) =>
+// {
+//     environmentMap.mapping = THREE.EquirectangularReflectionMapping;
 
-    scene.background = environmentMap;
-    scene.environment = environmentMap;
-})
+//     scene.background = environmentMap;
+//     scene.environment = environmentMap;
+// })
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load('./rick-morty-space.jpg', (texture) => {
+    texture.image.width = 1024; // Ajusta a la resolución deseada
+    texture.image.height = 512;
+    
+    texture.needsUpdate = true; // Asegura que se apliquen los cambios
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.background = texture;
+    scene.environment = texture;
+});
 
 /**
  * Wobble
@@ -183,15 +193,15 @@ scene.add(wobble);
 /**
  * Plane
  */
-const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(15, 15, 15),
-    new THREE.MeshStandardMaterial()
-);
-plane.receiveShadow = true;
-plane.rotation.y = Math.PI;
-plane.position.y = - 5;
-plane.position.z = 5;
-scene.add(plane);
+// const plane = new THREE.Mesh(
+//     new THREE.PlaneGeometry(15, 15, 15),
+//     new THREE.MeshStandardMaterial()
+// );
+// plane.receiveShadow = true;
+// plane.rotation.y = Math.PI;
+// plane.position.y = - 5;
+// plane.position.z = 5;
+// scene.add(plane);
 
 /**
  * Lights
